@@ -76,7 +76,7 @@ public interface FCollection<T extends Serializable> extends AutoCloseable {
      * */
     class Builder {
 
-        private static final String DEFAULT_STORAGE_PATH = "/tmp";
+        private static final String DEFAULT_STORAGE_PATH = System.getProperty("java.io.tmpdir");
 
         private static final FSerializer DEFAULT_SERIALIZER = new FJdkSerializer();
 
