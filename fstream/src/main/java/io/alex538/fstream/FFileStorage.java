@@ -187,6 +187,21 @@ class FInputStream extends InputStream {
         return raf.read();
     }
 
+    @Override
+    public int read(byte[] b, int off, int len) throws IOException {
+        raf.seek(pos);
+
+        int remaining = (int) (endOfBlock - pos);
+        if (remaining <= 0) {
+            return -1;
+        }
+
+        int readCount = raf.read(b, off, Math.min(remaining, len));
+        pos += readCount;
+
+        return readCount;
+    }
+
 }
 
 class FOutputStream extends OutputStream {
@@ -198,8 +213,18 @@ class FOutputStream extends OutputStream {
     }
 
     @Override
-    public void write(int b) throws IOException {
-        raf.write(b);
+    public void write(int data) throws IOException {
+        raf.write(data);
+    }
+
+    @Override
+    public void write(byte[] data) throws IOException {
+        raf.write(data);
+    }
+
+    @Override
+    public void write(byte[] data, int off, int len) throws IOException {
+        raf.write(data, off, len);
     }
 
 }
