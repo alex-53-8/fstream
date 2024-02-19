@@ -15,7 +15,9 @@ class FFileStorageTest {
 
     @Test
     public void test_String() {
-        try (FFileStorage<String> storage = new FFileStorage<>(new FJdkSerializer(), "/tmp", "storage-1")) {
+        try (FFileStorage<String> storage = new FFileStorage<>(
+                new FJdkSerializer(), System.getProperty("java.io.tmpdir"), "storage-1"
+        )) {
 
             storage.write("1234567890");
             storage.write("2345678901");
@@ -32,7 +34,9 @@ class FFileStorageTest {
     }
     @Test
     public void test_TestDto() {
-        try (FFileStorage<TestDto> storage = new FFileStorage<>(new FJdkSerializer(), "/tmp", "storage-1")) {
+        try (FFileStorage<TestDto> storage = new FFileStorage<>(
+                new FJdkSerializer(), System.getProperty("java.io.tmpdir"), "storage-1"
+        )) {
             var sample1 = new TestDto(100, 400);
             var sample2 = new TestDto(200, 500);
             var sample3 = new TestDto(300, 600);

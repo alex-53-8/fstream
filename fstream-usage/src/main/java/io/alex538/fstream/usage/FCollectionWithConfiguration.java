@@ -14,7 +14,7 @@ public class FCollectionWithConfiguration {
         FCollection<UUID> collection =
                 FCollection.builder()
                         .serializer(new FstSerializer())
-                        .storageLocation("/tmp")
+                        .storageLocation(System.getProperty("java.io.tmpdir"))
                         .externalSortingMaxItemsInMemory(300)
                         .build()
                 ;
